@@ -1,8 +1,8 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Conjunctions', {
+  up(queryInterface, Sequelize) {
+    return queryInterface.createTable('Conjunctions', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,14 +11,14 @@ module.exports = {
       },
       UserId: {
         type: Sequelize.INTEGER,
-        references : {
-          model : 'Users'
+        references: {
+          model: 'Users'
         }
       },
       ProductId: {
         type: Sequelize.INTEGER,
-        references : {
-          model : 'Products'
+        references: {
+          model: 'Products'
         }
       },
       createdAt: {
@@ -31,7 +31,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Conjunctions');
+  down(queryInterface, Sequelize) {
+    return queryInterface.dropTable('Conjunctions');
   }
 };

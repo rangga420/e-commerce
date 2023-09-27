@@ -11,3 +11,12 @@ npx sequelize-cli model:generate --name Balance --attributes balance:integer,rol
 npx sequelize-cli migration:generate --name balance-addFk
 
 npx sequelize-cli seed:generate --name product-seed
+
+
+npm run start > running server express
+
+npm run start-css > running watch tailwind css
+
+npm run start-db > migrate all database and seeding
+
+npm run del-db > delete all database colom
