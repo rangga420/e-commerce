@@ -1,7 +1,11 @@
 class LoginController {
 
-  static renderLoginPage() {
+  static renderLoginPage(req,res) {
+    res.render('loginUser')
+  }
 
+  static createLoginPage(req,res){
+    
   }
 }
 
