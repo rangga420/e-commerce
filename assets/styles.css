@@ -593,6 +593,10 @@ video {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .h-\[42px\] {
   height: 42px;
 }
