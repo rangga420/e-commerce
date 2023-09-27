@@ -568,6 +568,7 @@ video {
   }
 }
 
+<<<<<<< HEAD
 .sr-only {
   position: absolute;
   width: 1px;
@@ -774,12 +775,15 @@ video {
   border-color: rgb(203 213 225 / var(--tw-border-opacity));
 }
 
+=======
+>>>>>>> ff2c3a8eac604d899e7a107efc4d25eb6814e084
 .border-y-stone-950 {
   --tw-border-opacity: 1;
   border-top-color: rgb(12 10 9 / var(--tw-border-opacity));
   border-bottom-color: rgb(12 10 9 / var(--tw-border-opacity));
 }
 
+<<<<<<< HEAD
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -893,6 +897,8 @@ video {
   text-align: center;
 }
 
+=======
+>>>>>>> ff2c3a8eac604d899e7a107efc4d25eb6814e084
 .text-\[32px\] {
   font-size: 32px;
 }
