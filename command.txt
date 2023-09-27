@@ -1,1 +1,13 @@
 npx sequelize-cli model:generate --name User --attributes username:string,email:string,password:string,role:string
+
+npx sequelize-cli model:generate --name Product --attributes nameProduct:string,imgProduct:string,price:integer,description:string,stock:integer
+
+npx sequelize-cli model:generate --name Conjunction --attributes UserId:integer,ProductId:integer
+
+npx sequelize-cli model:generate --name Transaction --attributes detailOrder:string,price:integer,UserId:integer
+
+npx sequelize-cli model:generate --name Balance --attributes balance:integer,role:string
+
+npx sequelize-cli migration:generate --name balance-addFk
+
+npx sequelize-cli seed:generate --name product-seed

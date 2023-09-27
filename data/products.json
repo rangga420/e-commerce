@@ -1,0 +1,23 @@
+[
+    {
+        "nameProduct" : "Air Jordan 1 Blue",
+        "imgProduct" : "https://cdn-images.farfetch-contents.com/15/95/78/34/15957834_30928142_600.jpg",
+        "price" : 1000000,
+        "description" : "new shoes from nike",
+        "stock" : 10
+    },
+    {
+        "nameProduct" : "Air Jordan 2 Red",
+        "imgProduct" : "https://cdn-images.farfetch-contents.com/15/95/78/34/15957834_30928142_600.jpg",
+        "price" : 2000000,
+        "description" : "new shoes from nike",
+        "stock" : 30
+    },
+    {
+        "nameProduct" : "Air Jordan 3 Green",
+        "imgProduct" : "https://cdn-images.farfetch-contents.com/15/95/78/34/15957834_30928142_600.jpg",
+        "price" : 1000000,
+        "description" : "new shoes from nike",
+        "stock" : 30
+    }
+]
