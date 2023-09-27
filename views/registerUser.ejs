@@ -6,20 +6,46 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FORM REGISTER</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
-  <div class="container">
-    <input type="text" />
-    <form action="" method="get" class="form-example">
-      <label for="name">Username</label>
-      <input class="border-y-stone-950" type="text" name="name" id="name" required />
-      <div class="form-example">
-        <input type="submit" value="Subscribe!" />
+  <form action="/registers/users" method="post"
+    class="bg-gray-100 min-h-screen flex flex-col gap-5 items-center justify-center">
+    <div>
+      <span class="font-bold font text-gray-500">FORM REGISTER</span>
+    </div>
+
+    <div class="relative">
+      <input type="text" class="pl-10 pr-4 py-2 border rounded-lg w-[300px]" placeholder="Enter your username"
+        name="username" />
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ">
+        <i class="fa-regular fa-user text-gray-400"></i>
       </div>
-    </form>
-  </div>
+    </div>
+
+    <div class="relative">
+      <input type="password" class="pl-10 pr-4 py-2 border rounded-lg w-[300px]" placeholder="Enter your password"
+        name="password" />
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <i class="fa-solid fa-lock text-gray-400"></i>
+      </div>
+    </div>
+
+    <div class="relative">
+      <input type="text" class="pl-10 pr-4 py-2 border rounded-lg w-[300px]" placeholder="Enter your email"
+        name="email" />
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <i class="fas fa-envelope text-gray-400"></i>
+      </div>
+    </div>
+
+    <div class="relative">
+      <input type="submit" class="flex justify-center border rounded-lg w-[150px] h-[42px] bg-blue-600 text-white"
+        value="Register" />
+    </div>
+  </form>
 </body>
 
 </html>
