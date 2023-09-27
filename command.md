@@ -30,3 +30,10 @@ render page registers users
 METHOD POST: localhost:3000/registers/users
 create new user to database
 ```
+
+
+```json 
+SHOW PRODUCT
+METHOD GET: localhost:3000/products
+
+```
