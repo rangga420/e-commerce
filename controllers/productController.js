@@ -14,6 +14,21 @@ class ProductController {
 
   }
 
+  static renderAddProduct(req,res){
+    res.render('productAdd')
+  }
+
+  static createAddProduct(req,res){
+    const {nameProduct, imgProduct, price, description, stock} = req.body
+    Product.create({nameProduct, imgProduct, price, description, stock})
+    .then(result =>{
+      res.redirect('/products')
+    })
+    .catch(err =>{
+      res.send(err)
+    })
+  }
+
 }
 
 
