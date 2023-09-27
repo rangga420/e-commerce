@@ -20,3 +20,13 @@ npm run start-css > running watch tailwind css
 npm run start-db > migrate all database and seeding
 
 npm run del-db > delete all database colom
+
+```json
+FORM REGISTER
+
+METHOD GET: localhost:3000/registers/users
+render page registers users
+
+METHOD POST: localhost:3000/registers/users
+create new user to database
+```
