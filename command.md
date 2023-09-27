@@ -31,9 +31,18 @@ METHOD POST: localhost:3000/registers/users
 create new user to database
 ```
 
+```json 
+FORM LOGIN
+METHOD GET: localhost:3000/login/users
+render page login user
+
+METHOD POST: localhost:3000/login/users
+login page ecommerce
+```
 
 ```json 
 SHOW PRODUCT
 METHOD GET: localhost:3000/products
 
 ```
+
