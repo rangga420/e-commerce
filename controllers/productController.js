@@ -27,12 +27,12 @@ class ProductController {
     const { nameProduct, imgProduct, price, description, stock } = req.body
     Product.create({ nameProduct, imgProduct, price, description, stock })
       .then(result => {
-        res.redirect('/products')
+        res.redirect('/products/list')
       })
       .catch(err => {
         if (err.name == "SequelizeValidationError"){
           const messages = err.errors.map((e) => e.message)
-          res.send(messages)
+          res.redirect('/products/add', { messages })
         } else {
           res.send(err)
         }
@@ -66,7 +66,7 @@ class ProductController {
           const lastBalance = balance - price
           return Balance.update({ balance: lastBalance }, { where: { UserId: userId } })
         } else {
-          return `Your have to charge ${currencyIDR(Math.abs(balance - price))}`
+          return `You have to top up your balance ${currencyIDR(Math.abs(balance - price))} to buy this product`
         }
 
       })

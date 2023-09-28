@@ -81,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         validationDescriptionLength(value) {
           if (value.length > 200) {
-            throw new Error('Description can not more than 400 character')
+            throw new Error('Description can not more than 200 character')
           }
         }
       }
