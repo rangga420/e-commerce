@@ -2,8 +2,7 @@
 const {
   Model
 } = require('sequelize');
-
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -21,17 +20,21 @@ module.exports = (sequelize, DataTypes) => {
         through: models.Conjunction
       })
     }
+
+    static addValueBalance(UserId) {
+      return sequelize.models.Balance.create({ role: "Customers", balance: 0, UserId });
+    }
   }
   User.init({
     username: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull : {
-          msg : "Username is required"
+        notNull: {
+          msg: "Username is required"
         },
-        notEmpty : {
-          msg : "Username is required"
+        notEmpty: {
+          msg: "Username is required"
         }
       }
     },
@@ -39,11 +42,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull : {
-          msg : "Email is required"
+        notNull: {
+          msg: "Email is required"
         },
-        notEmpty : {
-          msg : "Email is required"
+        notEmpty: {
+          msg: "Email is required"
         }
       }
     },
@@ -51,11 +54,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull : {
-          msg : "Password is required"
+        notNull: {
+          msg: "Password is required"
         },
-        notEmpty : {
-          msg : "Password is required"
+        notEmpty: {
+          msg: "Password is required"
         }
       }
     },

@@ -57,11 +57,13 @@ class UserController {
     const { username, email, password } = req.body
 
     User.create({ username, email, password })
-      .then(() => {
+      .then((result) => {
+        User.addValueBalance(result.id)
         res.redirect('/users/login')
       })
 
       .catch(err => {
+        console.log(err)
         res.send(err)
       })
 
