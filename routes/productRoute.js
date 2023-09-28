@@ -13,5 +13,8 @@ router.use((req, res, next) => {
 })
 router.get('/', ProductController.renderPageProduct)
 
+router.get('/add', ProductController.renderAddProduct)
+
+router.post('/add', ProductController.createAddProduct)
 
 module.exports = router

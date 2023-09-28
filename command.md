@@ -45,4 +45,8 @@ SHOW PRODUCT
 METHOD GET: localhost:3000/products
 
 ```
+```json
 
+additional : Add column Category
+
+```
