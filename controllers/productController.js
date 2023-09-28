@@ -71,6 +71,7 @@ class ProductController {
       }
     })
       .then(product => {
+        console.log(product)
         if (product.Users[0].Balance.balance >= product.price) {
           data = {
             price: product.price,
@@ -113,6 +114,7 @@ class ProductController {
       })
 
       .catch(err => {
+        console.log(err)
         res.send(err)
       })
   }
