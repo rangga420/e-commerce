@@ -90,12 +90,11 @@ class ProductController {
     const { nameProduct, imgProduct, price, description, stock } = req.body
     Product.create({ nameProduct, imgProduct, price, description, stock })
       .then(result => {
-        res.redirect('/products/list')
+        res.redirect('/products/admin/list')
       })
       .catch(err => {
-        if (err.name == "SequelizeValidationError") {
-          const messages = err.errors.map((e) => e.message)
-          res.redirect('/products/add', { messages })
+        if (err.name === 'SequelizeValidationError') {
+          res.send(err.errors.map((el) => el.message))
         } else {
           res.send(err)
         }
