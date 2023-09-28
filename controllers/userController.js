@@ -8,16 +8,11 @@ class UserController {
   }
 
   static addBalance(req, res) {
-
     const { balance } = req.body
     const { userId } = req.params
-    User.increment("balance", {
-      include: Balance,
-      where: { id: userId }
-    })
+    Balance.increment({ balance }, { where: { UserId: userId } })
       .then((balance) => {
-        console.log(balance)
-        res.send(balance)
+        res.redirect(`/products/${userId}`)
       })
       .catch(err => {
         res.send(err)
