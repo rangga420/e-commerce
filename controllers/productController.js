@@ -1,17 +1,18 @@
 const { Product, User, Conjunction, Balance } = require("../models")
-
+const currencyIDR = require('../helpers/currency')
 class ProductController {
 
   static renderPageProduct(req, res) {
     let product
     const { userId } = req.params
+    const errors = req.query.succes ? req.query.succes : req.query.failed
     Product.findAll({ order: [[['price', 'DESC']]] })
       .then(productAll => {
         product = productAll
         return Product.addUserProduct(productAll, userId)
       })
       .then(() => {
-        res.render('productPage', { product, userId })
+        res.render('productPage', { product, userId, errors })
       })
       .catch(err => {
         res.send(err)
@@ -40,25 +41,43 @@ class ProductController {
 
   static buyPorduct(req, res) {
     const { userId, productId } = req.params
-    Product.decrement({ stock: 1 }, { where: { id: productId } })
-      .then(() => {
-        return Product.findOne({
+    let product = ''
+    Product.findOne({
+      where: {
+        id: productId
+      },
+      include: [
+        {
+          model: User,
           where: {
-            id: productId
+            id: userId,
           },
-          include: [
-            {
-              model: User,
-              include: Balance
-            }
-          ]
-        })
+          include: Balance
+        }
+      ]
+    })
+      .then(resultProduct => {
+        product = resultProduct
+        return Balance.validateBalance(product)
       })
       .then(result => {
-        res.send(result)
-        // res.redirect(`/products/${userId}`)
-      })
+        const { balance, price, status } = result
+        if (status) {
+          const lastBalance = balance - price
+          return Balance.update({ balance: lastBalance }, { where: { UserId: userId } })
+        } else {
+          return `Your have to charge ${currencyIDR(Math.abs(balance - price))}`
+        }
 
+      })
+      .then(result => {
+        if (result == 1) {
+          return res.redirect(`/products/${userId}/?succes=Buy Item`)
+        } else {
+          console.log(result)
+          return res.redirect(`/products/${userId}/?failed=${result}`)
+        }
+      })
       .catch(err => {
         res.send(err)
       })
