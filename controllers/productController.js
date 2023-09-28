@@ -1,4 +1,4 @@
-const { Product, User, Conjunction } = require("../models")
+const { Product, User, Conjunction, Balance } = require("../models")
 
 class ProductController {
 
@@ -37,7 +37,21 @@ class ProductController {
     const { userId, productId } = req.params
     Product.decrement({ stock: 1 }, { where: { id: productId } })
       .then(() => {
-        res.redirect(`/products/${userId}`)
+        return Product.findOne({
+          where: {
+            id: productId
+          },
+          include: [
+            {
+              model: User,
+              include: Balance
+            }
+          ]
+        })
+      })
+      .then(result => {
+        res.send(result)
+        // res.redirect(`/products/${userId}`)
       })
 
       .catch(err => {
