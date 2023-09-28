@@ -17,6 +17,7 @@ class UserController {
       .catch(err => {
         res.send(err)
       })
+      / s
   }
 
 
