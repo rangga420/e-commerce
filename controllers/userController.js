@@ -19,11 +19,6 @@ class UserController {
       })
   }
 
-
-
-
-
-
   static renderLoginPage(req, res) {
     const { errors } = req.query
     res.render('loginUser', { errors })
@@ -63,7 +58,7 @@ class UserController {
 
     User.create({ username, email, password })
       .then(() => {
-        res.redirect('/users/registers')
+        res.redirect('/users/login')
       })
 
       .catch(err => {
