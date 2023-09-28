@@ -29,6 +29,34 @@ class ProductController {
     })
   }
 
+  static renderEditProduct(req,res){
+    Product.findByPk(req.params.id)
+    .then(product =>{
+      res.render("productEdit", { product })
+      // res.send(product)
+    })
+    .catch(err =>{
+      res.send(err)
+    })
+  }
+
+  static updateProduct(req,res){
+    const {nameProduct, imgProduct, price, description, stock} = req.body
+
+    Product.update({nameProduct, imgProduct, price, description, stock},{
+      where : {
+        id : req.params.id
+      }
+    })
+    .then(updated =>{
+      res.redirect('/products')
+    })
+    .catch(err =>{
+      res.send(err)
+    })
+  }
+
+  
 }
 
 

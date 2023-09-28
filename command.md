@@ -43,6 +43,8 @@ login page ecommerce
 ```json 
 SHOW PRODUCT
 METHOD GET: localhost:3000/products
+ADD PRODUCT
+METHOD POST localhost:3000/products/add
 
 ```
 ```json
