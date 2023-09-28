@@ -11,13 +11,12 @@ class UserController {
     const { balance } = req.body
     const { userId } = req.params
     Balance.increment({ balance }, { where: { UserId: userId } })
-      .then((balance) => {
+      .then(() => {
         res.redirect(`/products/${userId}`)
       })
       .catch(err => {
         res.send(err)
       })
-      / s
   }
 
 
