@@ -19,5 +19,47 @@
     "price": 1000000,
     "description": "new shoes from nike",
     "stock": 30
+  },
+  {
+    "nameProduct": "T-shirt",
+    "imgProduct": "https://s0.bukalapak.com/img/58830326392/s-463-463/38e8469038a1b3e7d9775e4573a01ee2.jpg",
+    "price": 100000,
+    "description": "T-shirt white",
+    "stock": 10
+  },
+  {
+    "nameProduct": "Jacket",
+    "imgProduct": "https://media.karousell.com/media/photos/products/2023/6/22/denim_jacketjaket_jeanstrucker_1687431631_cbe92e77_progressive.jpg",
+    "price": 200000,
+    "description": "Jacket jeans",
+    "stock": 30
+  },
+  {
+    "nameProduct": "long shirt",
+    "imgProduct": "https://s3.bukalapak.com/img/82009453492/s-282-282/data.jpeg",
+    "price": 150000,
+    "description": "long shirt with design",
+    "stock": 30
+  },
+  {
+    "nameProduct": "Jeans",
+    "imgProduct": "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/453955/sub/goods_453955_sub14.jpg",
+    "price": 300000,
+    "description": "Jeans from uniqlo",
+    "stock": 10
+  },
+  {
+    "nameProduct": "Short pants",
+    "imgProduct": "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/441247/item/goods_32_441247.jpg",
+    "price": 200000,
+    "description": "short pant from uniqlo",
+    "stock": 30
+  },
+  {
+    "nameProduct": "chino",
+    "imgProduct": "https://cardinal.co.id/wp-content/uploads/2020/06/FBUBI04037B-05C_3.jpg",
+    "price": 150000,
+    "description": "color cream",
+    "stock": 30
   }
 ]

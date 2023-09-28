@@ -1,18 +1,33 @@
-const { Product, User, Conjunction, Balance } = require("../models")
+const { Product, User, Conjunction, Balance, Transaction } = require("../models")
 const currencyIDR = require('../helpers/currency')
 class ProductController {
 
   static renderPageProduct(req, res) {
     let product
+    let currentBalance = ''
     const { userId } = req.params
     const errors = req.query.succes ? req.query.succes : req.query.failed
-    Product.findAll({ order: [[['price', 'DESC']]] })
+    Product.findAll({
+      order: [[['price', 'DESC']]],
+      include: {
+        model: User,
+        include: Balance
+      }
+    })
       .then(productAll => {
         product = productAll
-        return Product.addUserProduct(productAll, userId)
+        return Balance.findOne({
+          where: {
+            UserId: userId
+          }
+        })
+
       })
-      .then(() => {
-        res.render('productPage', { product, userId, errors })
+      .then((balance) => {
+        if (balance) {
+          currentBalance = currencyIDR(balance.balance)
+        }
+        res.render('productPage', { product, userId, errors, currentBalance })
       })
       .catch(err => {
         res.send(err)
@@ -30,7 +45,7 @@ class ProductController {
         res.redirect('/products/list')
       })
       .catch(err => {
-        if (err.name == "SequelizeValidationError"){
+        if (err.name == "SequelizeValidationError") {
           const messages = err.errors.map((e) => e.message)
           res.redirect('/products/add', { messages })
         } else {
@@ -41,77 +56,145 @@ class ProductController {
 
   static buyPorduct(req, res) {
     const { userId, productId } = req.params
-    let product = ''
+    let data = {}
+    let currentBalance = ''
     Product.findOne({
       where: {
         id: productId
       },
-      include: [
-        {
-          model: User,
-          where: {
-            id: userId,
-          },
-          include: Balance
-        }
-      ]
+      include: {
+        model: User,
+        include: Balance
+      }
     })
-      .then(resultProduct => {
-        product = resultProduct
-        return Balance.validateBalance(product)
-      })
-      .then(result => {
-        const { balance, price, status } = result
-        if (status) {
-          const lastBalance = balance - price
-          return Balance.update({ balance: lastBalance }, { where: { UserId: userId } })
-        } else {
-          return `You have to top up your balance ${currencyIDR(Math.abs(balance - price))} to buy this product`
+      .then(product => {
+        if (product.Users[0].Balance.balance >= product.price) {
+          data = {
+            price: product.price,
+            product: product.nameProduct
+          }
+          currentBalance = product.Users[0].Balance.balance - product.price
+          return Balance.update({ balance: currentBalance }, {
+            where: {
+              UserId: userId
+            }
+          })
         }
-
       })
-      .then(result => {
-        if (result == 1) {
+
+      .then(currentBalance => {
+        if (currentBalance) {
+          console.log('ini jalan')
+          return Product.decrement({ stock: 1 }, {
+            where: {
+              id: productId
+            }
+          })
+        }
+      })
+
+      .then(decrementStock => {
+        if (decrementStock) {
+          const { price, product } = data
+          return Transaction.create({ UserId: userId, detailOrder: `${product}-${Date.now()}`, price })
+        }
+      })
+
+      .then(transaction => {
+        if (transaction) {
           return res.redirect(`/products/${userId}/?succes=Buy Item`)
         } else {
-          console.log(result)
+          const result = `You have to top up your balance ${currencyIDR(Math.abs(currentBalance))} to buy this product`
           return res.redirect(`/products/${userId}/?failed=${result}`)
         }
+      })
+
+      .catch(err => {
+        res.send(err)
+      })
+  }
+
+  static renderEditProduct(req, res) {
+    Product.findByPk(req.params.id)
+      .then(product => {
+        res.render("productEdit", { product })
+        // res.send(product)
       })
       .catch(err => {
         res.send(err)
       })
   }
 
-  static renderEditProduct(req,res){
-    Product.findByPk(req.params.id)
-    .then(product =>{
-      res.render("productEdit", { product })
-      // res.send(product)
-    })
-    .catch(err =>{
-      res.send(err)
-    })
-  }
+  static updateProduct(req, res) {
+    const { nameProduct, imgProduct, price, description, stock } = req.body
 
-  static updateProduct(req,res){
-    const {nameProduct, imgProduct, price, description, stock} = req.body
-
-    Product.update({nameProduct, imgProduct, price, description, stock},{
-      where : {
-        id : req.params.id
+    Product.update({ nameProduct, imgProduct, price, description, stock }, {
+      where: {
+        id: req.params.id
       }
     })
-    .then(updated =>{
-      res.redirect('/products')
-    })
-    .catch(err =>{
-      res.send(err)
-    })
+      .then(updated => {
+        res.redirect('/products')
+      })
+      .catch(err => {
+        res.send(err)
+      })
   }
 
 
 }
 
+// static buyPorduct(req, res) {
+//   const { userId, productId } = req.params
+//   let product = ''
+//   Product.findOne({
+//     where: {
+//       id: productId
+//     },
+//     include: [
+//       {
+//         model: User,
+//         where: {
+//           id: userId,
+//         },
+//         include: Balance
+//       }
+//     ]
+//   })
+//     .then(resultProduct => {
+//       product = resultProduct
+//       return Balance.validateBalance(product)
+//     })
+//     .then(result => {
+//       const { balance, price, status } = result
+//       if (status) {
+//         const lastBalance = balance - price
+//         return Balance.update({ balance: lastBalance }, { where: { UserId: userId } })
+//       } else {
+//         return '2'
+//       }
 
+//     })
+//     .then(result => {
+//       console.log(result)
+//       // res.redirect(`/products/${userId}`)
+//       if (result == 1) {
+//         return Product.decrement({ stock: 1 }, {
+//           where: {
+//             id: productId
+//           }
+//         })
+//       } else {
+//         return 2
+//       }
+//     })
+
+//     .then(result => {
+//       console.log(result[0][0])
+//       return res.redirect(`/products/${userId}/?succes=Buy Item`)
+//     })
+//     .catch(err => {
+//       res.send(err)
+//     })
+// }
 module.exports = ProductController
