@@ -30,6 +30,7 @@ class ProductController {
         return Product.addUserProduct(product, userId)
       })
       .then(() => {
+        console.log(currentBalance)
         res.render('productPage', { product, userId, errors, currentBalance })
       })
       .catch(err => {
@@ -67,6 +68,9 @@ class ProductController {
       },
       include: {
         model: User,
+        where: {
+          id: userId,
+        },
         include: Balance
       }
     })
@@ -84,6 +88,7 @@ class ProductController {
             }
           })
         }
+        currentBalance = product.Users[0].Balance.balance - product.price
       })
 
       .then(currentBalance => {
@@ -149,57 +154,4 @@ class ProductController {
 
 }
 
-// static buyPorduct(req, res) {
-//   const { userId, productId } = req.params
-//   let product = ''
-//   Product.findOne({
-//     where: {
-//       id: productId
-//     },
-//     include: [
-//       {
-//         model: User,
-//         where: {
-//           id: userId,
-//         },
-//         include: Balance
-//       }
-//     ]
-//   })
-//     .then(resultProduct => {
-//       product = resultProduct
-//       return Balance.validateBalance(product)
-//     })
-//     .then(result => {
-//       const { balance, price, status } = result
-//       if (status) {
-//         const lastBalance = balance - price
-//         return Balance.update({ balance: lastBalance }, { where: { UserId: userId } })
-//       } else {
-//         return '2'
-//       }
-
-//     })
-//     .then(result => {
-//       console.log(result)
-//       // res.redirect(`/products/${userId}`)
-//       if (result == 1) {
-//         return Product.decrement({ stock: 1 }, {
-//           where: {
-//             id: productId
-//           }
-//         })
-//       } else {
-//         return 2
-//       }
-//     })
-
-//     .then(result => {
-//       console.log(result[0][0])
-//       return res.redirect(`/products/${userId}/?succes=Buy Item`)
-//     })
-//     .catch(err => {
-//       res.send(err)
-//     })
-// }
 module.exports = ProductController

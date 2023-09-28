@@ -7,13 +7,13 @@ nodemailer.createTestAccount((err, account) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "fae.raynor93@ethereal.email", // generated ethereal user
-      pass: "fSKw7KhDgmzYArJJJM"  // generated ethereal password
+      user: "monte.lindgren44@ethereal.email", // generated ethereal user
+      pass: "dtWSaeaZxBx9Ud764h"  // generated ethereal password
     }
   });
   const info = {
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
-    to: "oleta72@ethereal.email", // list of receivers
+    to: "monte.lindgren44@ethereal.email", // list of receivers
     subject: "Hello ✔", // Subject line
     text: "Hello world?", // plain text body
     html: "<b>Hello world?</b>", // html body

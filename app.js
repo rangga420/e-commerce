@@ -11,6 +11,7 @@ app.use(express.static('assets'))
 app.use('/assets', express.static('assets'))
 app.use(express.urlencoded({ extended: true }))
 
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -19,6 +20,7 @@ app.use(session({
 }))
 
 app.use('/users', require('./routes/userRoute'))
+
 
 app.use('/products', require('./routes/productRoute'))
 

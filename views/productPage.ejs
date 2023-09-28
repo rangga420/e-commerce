@@ -45,6 +45,11 @@
               <a class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
                 href="/users/transactions/<%= userId  %>" data-te-nav-link-ref>Transaction</a>
             </li>
+            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <!-- Dashboard link -->
+              <a class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+                href="/users/balances/<%= userId  %>" data-te-nav-link-ref>Add Balance</a>
+            </li>
           </ul>
         </div>
 
@@ -55,7 +60,7 @@
             <!-- Second dropdown trigger -->
             <div
               class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400">
-              BALANCE: <%= currentBalance %>
+              BALANCE: here here <%= currentBalance %>
             </div>
             <!-- Second dropdown menu -->
             <ul

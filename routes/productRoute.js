@@ -3,14 +3,14 @@ const router = express.Router()
 const ProductController = require('../controllers/productController')
 
 
-router.use((req, res, next) => {
-  if (!req.session.role) {
-    res.redirect('/users/login?errors=Please Login First')
-  } else {
-    next()
-  }
+// router.use((req, res, next) => {
+//   if (!req.session.role) {
+//     res.redirect('/users/login?errors=Please Login First')
+//   } else {
+//     next()
+//   }
 
-})
+// })
 
 
 router.get('/add', ProductController.renderAddProduct)
