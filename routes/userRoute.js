@@ -14,8 +14,8 @@ router.get('/logout', UserController.getLogoutUser)
 router.get('/balances/:userId', UserController.renderBalancePage)
 router.post('/balances/:userId', UserController.addBalance)
 
-router.get('/users/edit/:userId', UserController.addBalance)
-router.post('/users/edit/:userId', UserController.addBalance)
+router.get('/edit/:userId', UserController.renderUserPage)
+router.post('/edit/:userId', UserController.updateUser)
 
 
 

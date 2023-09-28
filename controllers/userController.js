@@ -3,6 +3,35 @@ const bcrypt = require('bcryptjs')
 
 class UserController {
 
+  static renderUserPage(req, res) {
+    const { userId } = req.params
+    User.findByPk(userId)
+      .then(user => {
+        res.render('editUser', { user })
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
+
+  static updateUser(req, res) {
+    const { userId } = req.params
+    const { username, email } = req.body
+    User.update({ username, email }, {
+      where: {
+        id: userId
+      }
+    })
+    .then(result =>{
+      res.redirect(`/users/edit/${req.params.userId}`)
+    })
+    .catch(err =>{
+      res.send(err)
+    })
+  }
+
+
+
   static renderBalancePage(req, res) {
     res.render('balancesUser')
   }
