@@ -23,6 +23,7 @@ app.use('/users', require('./routes/userRoute'))
 
 
 app.use('/products', require('./routes/productRoute'))
+// app.use('/products', require('./routes/usersMiddleware'))
 
 
 app.listen(3000, () => {

@@ -1,6 +1,50 @@
 const { Product, User, Conjunction, Balance, Transaction } = require("../models")
+const { Op } = require('sequelize')
 const currencyIDR = require('../helpers/currency')
 class ProductController {
+
+  static deleteProduct(req, res) {
+    Conjunction.destroy({
+      where: {
+        ProductId: req.params.id
+      }
+    })
+      .then(() => {
+        return Product.destroy({
+          where: {
+            id: req.params.id
+          }
+        })
+      })
+
+      .then(() => {
+        res.redirect('/products/admin/list')
+      })
+
+      .catch(err => {
+        res.send(err)
+      })
+
+  }
+
+  static renderListPage(req, res) {
+    let options = {
+      where: {}
+    }
+    const { search } = req.query
+    if (search) {
+      options.where.nameProduct = {
+        [Op.iLike]: `%${search}%`
+      }
+    }
+    Product.findAll(options)
+      .then(product => {
+        res.render('listPage', { product })
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
 
   static renderPageProduct(req, res) {
     let product

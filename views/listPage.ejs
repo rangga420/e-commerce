@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form method="get">
+    <input type="text" name="search">
+    <input type="submit" value="Search">
+    <table border="1">
+      <tr>
+        <td>Name Product</td>
+        <td>Image Product</td>
+        <td>Price</td>
+        <td>Description</td>
+        <td>Stock</td>
+        <td>Action</td>
+      </tr>
+      <% product.forEach((el)=> { %>
+        <tr>
+          <td>
+            <%= el.nameProduct %>
+          </td>
+          <td>
+            <%= el.imgProduct %>
+          </td>
+          <td>
+            <%= el.price %>
+          </td>
+          <td>
+            <%= el.description %>
+          </td>
+          <td>
+            <%= el.stock %>
+          </td>
+          <td>
+            <a href="/products/<%= el.id  %>/delete"><button>delete</button></a>
+            <!-- <a href="/products//edit"><button>edit</button></a> -->
+          </td>
+        </tr>
+        <% }) %>
+
+    </table>
+  </form>
+
+</body>
+
+</html>

@@ -126,6 +126,10 @@ class UserController {
           const valuePassword = bcrypt.compareSync(password, user.password)
           if (user.username && valuePassword) {
             dataUser = user
+            if (user.name === 'admin') {
+
+              req.session.role = 'Admin'
+            }
             req.session.role = user.role
             return UserController.sendEmail(user.username, user.email)
           }
