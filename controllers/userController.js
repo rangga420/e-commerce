@@ -42,7 +42,7 @@ class UserController {
 
     User.create({ username, email, password })
       .then(() => {
-        res.redirect('/registers/users')
+        res.redirect('/users/registers')
       })
 
       .catch(err => {

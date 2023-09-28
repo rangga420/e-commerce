@@ -12,6 +12,9 @@
 <body>
   <div class="container flex flex-col items-center m-auto">
     <div class="mt-10 text-4xl font-bold text-gray-700">PRODUCTION</div>
+    <div class="mt-10 text-4xl font-bold text-gray-700">
+      <%= errors ? errors : '' %>
+    </div>
     <div class="flex flex-wrap justify-center">
       <% product.forEach((el)=> { %>
         <% if(el.showStock()){ %>
