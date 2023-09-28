@@ -11,16 +11,14 @@ app.use(express.static('assets'))
 app.use('/assets', express.static('assets'))
 app.use(express.urlencoded({ extended: true }))
 
-
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false }
 }))
-app.use('/login', require('./routes/loginRoute'))
 
-app.use('/registers', require('./routes/registerRoute'))
+app.use('/users', require('./routes/userRoute'))
 
 app.use('/products', require('./routes/productRoute'))
 

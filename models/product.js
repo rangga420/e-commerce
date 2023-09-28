@@ -2,18 +2,34 @@
 const {
   Model
 } = require('sequelize');
+
+const currencyIDR = require('../helpers/currency')
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
       Product.belongsToMany(models.User, {
         through: models.Conjunction
       })
+    }
+
+    get currencyIDR() {
+      return currencyIDR(this.price)
+    }
+
+    showStock() {
+      return this.stock > 0 ? this.stock : ''
+    }
+
+    static addUserProduct(productAll, userId) {
+      return productAll.map(product => {
+        return sequelize.models.Conjunction.findOrCreate({
+          where: {
+            UserId: userId,
+            ProductId: product.id
+          }
+        });
+      });
     }
   }
   Product.init({
