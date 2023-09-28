@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="container flex flex-col items-center m-auto">
+  <div class="flex flex-col m-auto" style="width: 80%;">
     <nav
       class="mt-5 flex-no-wrap relative flex w-full items-center justify-between bg-[#FBFBFB] py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
       <div class="flex w-full flex-wrap items-center justify-between px-3">
@@ -43,7 +43,7 @@
             <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
               <!-- Dashboard link -->
               <a class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
-                href="/users/transactions/<%= userId  %>" data-te-nav-link-ref>Transaction</a>
+                href="/users/transactions/<%= user.id  %>" data-te-nav-link-ref>Transaction</a>
             </li>
           </ul>
         </div>
@@ -55,7 +55,7 @@
             <!-- Second dropdown trigger -->
             <div
               class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400">
-              BALANCE: <%= currentBalance %>
+              BALANCE: <%= user.Balance.balance %>
             </div>
             <!-- Second dropdown menu -->
             <ul
@@ -105,51 +105,39 @@
         </div>
       </div>
     </nav>
-    <div class="mt-10 text-4xl font-bold text-gray-700">PRODUCTION</div>
-    <div class="mt-10 text-4xl font-bold text-gray-700">
-      <%= errors ? errors : '' %>
-    </div>
-    <div class="flex flex-wrap justify-center">
-      <% product.forEach((el)=> { %>
-        <% if(el.showStock()){ %>
-          <div
-            class="ml-10 mt-20 relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div
-              class="relative mx-4 -mt-6 h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
-              <img class="object-contain h-48 w-96" src="<%= el.imgProduct  %>" alt="img-blur-shadow" layout="fill" />
-            </div>
-            <div class="p-6">
-              <h5
-                class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                <%= el.nameProduct %>
-              </h5>
-              <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                <%= el.description %>
-              </p>
-              <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">Stock <%=
-                  el.showStock() %>
-              </p>
-              <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">Price <%=
-                  el.currencyIDR %>
-              </p>
-            </div>
-            <div class="p-6 pt-0">
-              <a href="/products/<%= userId  %>/buy/<%= el.id  %>">
-                <button
-                  class="select-none rounded-lg bg-blue-600 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                  type="button" data-ripple-light="true">
-                  Buy
-                </button>
-              </a>
-            </div>
-          </div>
-          <% } %>
+    <div class="flex justify-center mt-10 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-[80%] py-2 sm:px-6 lg:px-8 m-auto">
+        <div class="overflow-hidden">
+          <table class="min-w-[80%] text-left text-sm font-light">
+            <thead class="border-b font-medium dark:border-neutral-500">
+              <tr>
+                <th scope="col" class="px-6 py-4">No</th>
+                <th scope="col" class="px-6 py-4">Order Detail</th>
+                <th scope="col" class="px-6 py-4">Price</th>
+              </tr>
+            </thead>
+            <% user.Transactions.forEach((el, index)=> { %>
+              <tbody>
+                <tr class="border-b dark:border-neutral-500">
+                  <td class="whitespace-nowrap px-6 py-4">
+                    <%= ++index %>
+                  </td>
+                  <td class="whitespace-nowrap px-6 py-4">
+                    <%= el.detailOrder %>
+                  </td>
+                  <td class="whitespace-nowrap px-6 py-4">
+                    <%= el.currencyIDR %>
+                  </td>
 
-            <% }) %>
+                </tr>
+              </tbody>
+              <% }) %>
 
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-
 </body>
 
 </html>

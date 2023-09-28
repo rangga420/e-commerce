@@ -27,6 +27,9 @@ class ProductController {
         if (balance) {
           currentBalance = currencyIDR(balance.balance)
         }
+        return Product.addUserProduct(product, userId)
+      })
+      .then(() => {
         res.render('productPage', { product, userId, errors, currentBalance })
       })
       .catch(err => {

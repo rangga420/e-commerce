@@ -740,6 +740,10 @@ video {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
@@ -881,6 +885,18 @@ video {
   min-width: max-content;
 }
 
+.min-w-full {
+  min-width: 100%;
+}
+
+.min-w-\[90\%\] {
+  min-width: 90%;
+}
+
+.min-w-\[80\%\] {
+  min-width: 80%;
+}
+
 .max-w-\[90\%\] {
   max-width: 90%;
 }
@@ -919,6 +935,10 @@ video {
   flex-wrap: wrap;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-center {
   align-items: center;
 }
@@ -945,6 +965,10 @@ video {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .truncate {
@@ -987,6 +1011,10 @@ video {
 
 .border {
   border-width: 1px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
 }
 
 .border-solid {
@@ -1086,6 +1114,11 @@ video {
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
 }
 
+.bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
 .bg-clip-border {
   background-clip: border-box;
 }
@@ -1169,6 +1202,11 @@ video {
 .py-\[0\.15em\] {
   padding-top: 0.15em;
   padding-bottom: 0.15em;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pt-\[0\.37rem\] {
@@ -1280,6 +1318,10 @@ video {
 
 .font-normal {
   font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .uppercase {
@@ -1684,6 +1726,11 @@ video {
 }
 
 @media (prefers-color-scheme: dark) {
+  .dark\:border-neutral-500 {
+    --tw-border-opacity: 1;
+    border-color: rgb(115 115 115 / var(--tw-border-opacity));
+  }
+
   .dark\:bg-neutral-600 {
     --tw-bg-opacity: 1;
     background-color: rgb(82 82 82 / var(--tw-bg-opacity));
@@ -1740,6 +1787,16 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:-mx-6 {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -1747,6 +1804,11 @@ video {
 }
 
 @media (min-width: 1024px) {
+  .lg\:-mx-8 {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+
   .lg\:mb-0 {
     margin-bottom: 0px;
   }
@@ -1787,6 +1849,11 @@ video {
   .lg\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .lg\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .lg\:pr-2 {

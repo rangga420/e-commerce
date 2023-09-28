@@ -17,6 +17,6 @@ router.post('/balances/:userId', UserController.addBalance)
 router.get('/users/edit/:userId', UserController.addBalance)
 router.post('/users/edit/:userId', UserController.addBalance)
 
-
+router.get('/transactions/:userId', UserController.renderTransactionPage)
 
 module.exports = router

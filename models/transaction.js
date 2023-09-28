@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const currencyIDR = require('../helpers/currency')
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     /**
@@ -12,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Transaction.belongsTo(models.User)
+    }
+
+    get currencyIDR() {
+      return currencyIDR(this.price)
     }
   }
   Transaction.init({
